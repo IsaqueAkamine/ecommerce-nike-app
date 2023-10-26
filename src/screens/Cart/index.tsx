@@ -1,8 +1,8 @@
 import React from "react";
 import { FlatList } from "react-native";
+import { useSelector } from "react-redux";
 
 import CartListItem from "../../components/CartListItem";
-import cart from "../../data/cart";
 
 import {
   CheckoutButton,
@@ -15,11 +15,12 @@ import {
   TotalsContainer,
 } from "./styles";
 
-const ShoppingCart: React.FC = () => {
+const Cart: React.FC = () => {
+  const cartItems = useSelector((state) => state.cart.items);
   return (
     <Container>
       <FlatList
-        data={cart}
+        data={cartItems}
         renderItem={({ item }) => <CartListItem cartItem={item} />}
         showsVerticalScrollIndicator={false}
         ListFooterComponent={() => (
@@ -48,4 +49,4 @@ const ShoppingCart: React.FC = () => {
   );
 };
 
-export default ShoppingCart;
+export default Cart;

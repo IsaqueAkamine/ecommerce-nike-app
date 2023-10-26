@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   AddCartButton,
@@ -14,6 +14,7 @@ import {
   ScrollContainer,
   Title,
 } from "./styles";
+import { cartSlice } from "../../store/cartSlice";
 
 const Product = ({ uri }) => (
   <ImageContainer>
@@ -23,6 +24,11 @@ const Product = ({ uri }) => (
 
 const Details: React.FC = () => {
   const product = useSelector((state) => state.products.selectedProduct);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(cartSlice.actions.addCartItem({ product }));
+  };
 
   return (
     <Container>
@@ -49,7 +55,7 @@ const Details: React.FC = () => {
       </ScrollContainer>
 
       {/* Add to cart button */}
-      <AddCartButton>
+      <AddCartButton onPress={handleAddToCart}>
         <AddCartText>Add to cart</AddCartText>
       </AddCartButton>
 
