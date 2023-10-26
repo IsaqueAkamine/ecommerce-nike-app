@@ -1,7 +1,6 @@
 import React from "react";
 import { FlatList } from "react-native";
-
-import products from "../../data/products";
+import { useSelector } from "react-redux";
 
 import {
   AddCartButton,
@@ -23,7 +22,7 @@ const Product = ({ uri }) => (
 );
 
 const Details: React.FC = () => {
-  const product = products[0];
+  const product = useSelector((state) => state.products.selectedProduct);
 
   return (
     <Container>

@@ -12,7 +12,7 @@ export const HomeStack = () => {
   return (
     <Stack.Navigator initialRouteName="Products">
       <Stack.Screen
-        name="Produtcs"
+        name="Products"
         component={Products}
         options={({ navigation }) => ({
           headerRight: () => (

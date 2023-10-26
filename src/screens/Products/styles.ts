@@ -8,8 +8,6 @@ export const Container = styled.View`
   background-color: #fff;
 `;
 
-export const Title = styled.Text``;
-
 export const ImageButton = styled.Pressable`
   margin: 2px;
 `;
