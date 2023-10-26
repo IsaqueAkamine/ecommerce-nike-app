@@ -1,15 +1,24 @@
 import React from "react";
 import { FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import products from "../../data/products";
 
-import { Container, Image, ImageContainer, Title } from "./styles";
+import { Container, Image, ImageButton, Title } from "./styles";
 
-const Product = ({ uri }) => (
-  <ImageContainer>
-    <Image source={{ uri }} />
-  </ImageContainer>
-);
+const Product = ({ uri }) => {
+  const navigation = useNavigation();
+
+  const handleNavigateToDetails = () => {
+    navigation.navigate("Details");
+  };
+
+  return (
+    <ImageButton onPress={handleNavigateToDetails}>
+      <Image source={{ uri }} />
+    </ImageButton>
+  );
+};
 
 const Products: React.FC = () => {
   return (

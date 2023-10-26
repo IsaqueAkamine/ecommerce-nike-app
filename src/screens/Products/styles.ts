@@ -10,7 +10,7 @@ export const Container = styled.View`
 
 export const Title = styled.Text``;
 
-export const ImageContainer = styled.View`
+export const ImageButton = styled.Pressable`
   margin: 2px;
 `;
 
