@@ -1,1 +1,3 @@
 # ecommerce-nike-app
+This application is based on:
+https://notjust.notion.site/Let-s-build-the-Ultimate-Nike-app-with-React-Native-and-Redux-9d0873d02a9940daa3f1442478f2c38c
