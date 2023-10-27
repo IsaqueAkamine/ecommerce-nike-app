@@ -23,7 +23,7 @@ import {
 const Cart: React.FC = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const subTotal = useSelector(selectSubtotal);
-  const delivery = useSelector(selectDeliveryPrice);
+  const deliveryFee = useSelector(selectDeliveryPrice);
   const total = useSelector(selectTotal);
 
   return (
@@ -40,7 +40,7 @@ const Cart: React.FC = () => {
             </RowContainer>
             <RowContainer>
               <TextInfo>Delivery</TextInfo>
-              <TextInfo>{delivery} US$</TextInfo>
+              <TextInfo>{deliveryFee} US$</TextInfo>
             </RowContainer>
             <RowContainer>
               <TextInfoBold>Total</TextInfoBold>

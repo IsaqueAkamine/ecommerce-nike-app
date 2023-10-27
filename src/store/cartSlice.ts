@@ -22,7 +22,20 @@ export const cartSlice = createSlice({
         state.items.push({ product: newProduct, quantity: 1 });
       }
     },
-    changeQuantity: (state, action) => {},
+    changeQuantity: (state, action) => {
+      const { productId, amount } = action.payload;
+      const cartItem = state.items.find(
+        ({ product }) => product.id === productId
+      );
+
+      if (cartItem) {
+        cartItem.quantity += amount;
+      }
+
+      if (cartItem.quantity <= 0) {
+        state.items = state.items.filter((item) => item !== cartItem);
+      }
+    },
   },
 });
 
@@ -34,7 +47,7 @@ export const selectSubtotal = (state) =>
     0
   );
 
-export const selectSelf = (state) => state.cart;
+const selectSelf = (state) => state.cart;
 
 export const selectDeliveryPrice = createSelector(
   selectSelf,
