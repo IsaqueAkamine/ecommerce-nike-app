@@ -14,9 +14,18 @@ import {
   TextInfoBold,
   TotalsContainer,
 } from "./styles";
+import {
+  selectDeliveryPrice,
+  selectSubtotal,
+  selectTotal,
+} from "../../store/cartSlice";
 
 const Cart: React.FC = () => {
   const cartItems = useSelector((state) => state.cart.items);
+  const subTotal = useSelector(selectSubtotal);
+  const delivery = useSelector(selectDeliveryPrice);
+  const total = useSelector(selectTotal);
+
   return (
     <Container>
       <FlatList
@@ -27,15 +36,15 @@ const Cart: React.FC = () => {
           <TotalsContainer>
             <RowContainer>
               <TextInfo>Subtotal</TextInfo>
-              <TextInfo>410,00 US$</TextInfo>
+              <TextInfo>{subTotal} US$</TextInfo>
             </RowContainer>
             <RowContainer>
               <TextInfo>Delivery</TextInfo>
-              <TextInfo>16,50 US$</TextInfo>
+              <TextInfo>{delivery} US$</TextInfo>
             </RowContainer>
             <RowContainer>
               <TextInfoBold>Total</TextInfoBold>
-              <TextInfoBold>426,50 US$</TextInfoBold>
+              <TextInfoBold>{total} US$</TextInfoBold>
             </RowContainer>
           </TotalsContainer>
         )}
