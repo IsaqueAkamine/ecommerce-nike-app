@@ -15,6 +15,7 @@ import {
   Title,
 } from "./styles";
 import { cartSlice } from "../../store/cartSlice";
+import { useNavigation } from "@react-navigation/native";
 
 const Product = ({ uri }) => (
   <ImageContainer>
@@ -25,9 +26,11 @@ const Product = ({ uri }) => (
 const Details: React.FC = () => {
   const product = useSelector((state) => state.products.selectedProduct);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const handleAddToCart = () => {
     dispatch(cartSlice.actions.addCartItem({ product }));
+    navigation.goBack();
   };
 
   return (
