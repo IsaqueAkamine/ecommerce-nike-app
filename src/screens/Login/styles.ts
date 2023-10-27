@@ -12,11 +12,10 @@ export const Container = styled.View`
 export const WelcomeContainer = styled.View`
   align-items: center;
   justify-content: center;
-  height: ${height * 0.3}px;
 `;
 
 export const NikeLogo = styled.Image`
-  width: ${width * 0.3}px;
+  height: ${width * 0.4}px;
   aspect-ratio: 1;
 `;
 
@@ -36,6 +35,7 @@ export const LoginText = styled.Text`
 `;
 
 export const InputsContainer = styled.View`
+  margin-top: 20px;
   gap: 8px;
 `;
 
