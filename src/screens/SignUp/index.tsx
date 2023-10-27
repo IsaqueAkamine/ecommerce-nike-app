@@ -39,10 +39,10 @@ const SignUp: React.FC = () => {
     setIsLoading(true);
     let error = "";
 
-    if (username.trim().length < 3) error = "Invalid username";
-    else if (email.trim().length < 3) error = "Invalid email";
-    else if (password.trim().length < 3) error = "Invalid password";
-    else if (password !== confirmPassword) error = "Invalid password";
+    if (username.trim().length < 3) error = "Nome inválido";
+    else if (email.trim().length < 3) error = "Email inválido";
+    else if (password.trim().length < 3) error = "Senha inválida";
+    else if (password !== confirmPassword) error = "Senha inválida";
 
     if (error.length > 0) {
       setIsLoading(false);
