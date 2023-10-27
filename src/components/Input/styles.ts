@@ -7,6 +7,7 @@ export const Container = styled.View`
   border-color: #ebf0ff;
   padding: 12px 16px;
   gap: 10px;
+  align-items: center;
 `;
 
 export const InputStyled = styled.TextInput`
