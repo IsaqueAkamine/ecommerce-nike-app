@@ -56,49 +56,13 @@ export const LoginButtonText = styled.Text`
   letter-spacing: 0.5px;
 `;
 
-export const SeparatorContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-  gap: 18px;
-  margin-top: 20px;
-`;
-
-export const Divider = styled.View`
-  height: 1px;
-  flex: 1;
-  background-color: #ebf0ff;
-`;
-
-export const SeparatorText = styled.Text`
-  color: #9098b1;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 21px;
-  letter-spacing: 0.07px;
-`;
-
-export const SocialButtonsContainer = styled.View`
-  margin-top: 18px;
-  gap: 8px;
-`;
-
-export const ForgotText = styled.Text`
-  text-align: center;
-  margin-top: 16px;
-  color: #40bfff;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 18px;
-  letter-spacing: 0.5px;
-`;
-
-export const NewAccountContainer = styled.View`
+export const AccountContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;
   margin-top: 14px;
 `;
-export const NewAccountText = styled.Text`
+export const AccountText = styled.Text`
   color: #9098b1;
   font-size: 12px;
   font-weight: 600;
@@ -106,7 +70,7 @@ export const NewAccountText = styled.Text`
   letter-spacing: 0.5px;
 `;
 
-export const NewAccountButtonText = styled.Text`
+export const AccountButtonText = styled.Text`
   color: #40bfff;
   font-size: 12px;
   font-weight: 600;

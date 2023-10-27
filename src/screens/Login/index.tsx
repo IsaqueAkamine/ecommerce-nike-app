@@ -20,9 +20,15 @@ import {
 } from "./styles";
 import Input from "../../components/Input";
 import SocialLoginButton from "../../components/SocialLoginButton";
+import { useNavigation } from "@react-navigation/native";
 
 const Login: React.FC = () => {
   const logo = require("../../assets/img/nikelogo.png");
+  const navigation = useNavigation();
+
+  const handleNavigateSignUp = () => {
+    navigation.navigate("SignUp");
+  };
 
   return (
     <Container>
@@ -56,7 +62,9 @@ const Login: React.FC = () => {
 
       <NewAccountContainer>
         <NewAccountText>Não tem uma conta? </NewAccountText>
-        <NewAccountButtonText>Registre-se</NewAccountButtonText>
+        <NewAccountButtonText onPress={handleNavigateSignUp}>
+          Registre-se
+        </NewAccountButtonText>
       </NewAccountContainer>
     </Container>
   );
