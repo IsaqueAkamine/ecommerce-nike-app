@@ -54,4 +54,7 @@ Siga estas etapas para configurar o projeto:
    ```
 
 3. Adicionei a opção de "Authentication" (Sign-in Method -> Email):
-   (https://softauthor.com/wp-content/uploads/2023/09/firebase-authentication-signin-method.png)
+![Sign In](https://softauthor.com/wp-content/uploads/2023/09/firebase-authentication-signin-method.png)
+
+4. Adicionei a opção de "Authentication" (Sign-in Method -> Email):
+![Firebase store](https://media.geeksforgeeks.org/wp-content/uploads/20210103112406/firestore1.jpg)
