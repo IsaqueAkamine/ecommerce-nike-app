@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Alert } from "react-native";
+import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Google from "expo-auth-session/providers/google";
 
 import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../services/firebaseConfig";
+
+import { AuthSlice } from "../../store/AuthSlice";
+import StorageKey from "../../enums/StorageKeys";
 
 import Input from "../../components/Input";
 import SocialLoginButton from "../../components/SocialLoginButton";
@@ -28,16 +35,15 @@ import {
   WelcomeContainer,
   WelcomeText,
 } from "./styles";
-import { ActivityIndicator, Alert } from "react-native";
-import { useDispatch } from "react-redux";
-import { AuthSlice } from "../../store/AuthSlice";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import StorageKey from "../../enums/StorageKeys";
 
 const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
+  });
 
   const dispatch = useDispatch();
 
@@ -70,6 +76,34 @@ const Login: React.FC = () => {
       });
   };
 
+  const handleSignInWithGoogle = async () => {
+    if (response?.type === "success") {
+      const token = response.authentication.accessToken;
+      if (!token) return;
+      try {
+        const response = await fetch(
+          "https://www.googleapis.com/userinfo/v2/me",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        const user = await response.json();
+        const newUser = {
+          accessToken: user.accessToken,
+          email: user.email,
+          picture: user.picture,
+        };
+        AsyncStorage.setItem(StorageKey.USER_KEY, JSON.stringify(newUser));
+        dispatch(AuthSlice.actions.loginUser(newUser));
+      } catch (error) {
+        // add handle error
+      }
+    } else if (response?.type === "cancel") {
+      Alert.alert("Error", "This function don't work with Expo");
+    }
+  };
+
   function handleForgotPassword() {
     setIsLoading(true);
     let error = "";
@@ -88,6 +122,10 @@ const Login: React.FC = () => {
       })
       .finally(() => setIsLoading(false));
   }
+
+  useEffect(() => {
+    handleSignInWithGoogle();
+  }, [response]);
 
   return (
     <Container>
@@ -127,7 +165,7 @@ const Login: React.FC = () => {
       </SeparatorContainer>
 
       <SocialButtonsContainer>
-        <SocialLoginButton name="Google" />
+        <SocialLoginButton name="Google" onPress={() => promptAsync()} />
         <SocialLoginButton name="Facebook" />
       </SocialButtonsContainer>
 

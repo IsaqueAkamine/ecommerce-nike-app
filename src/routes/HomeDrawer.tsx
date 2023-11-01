@@ -11,11 +11,17 @@ import { selectNumberOfItems } from "../store/cartSlice";
 
 import Products from "../screens/Products";
 import { AuthSlice } from "../store/AuthSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import StorageKey from "../enums/StorageKeys";
 
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props) {
   const dispatch = useDispatch();
+  const handleLogout = async () => {
+    dispatch(AuthSlice.actions.logout());
+    await AsyncStorage.removeItem(StorageKey.USER_KEY);
+  };
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
@@ -29,7 +35,7 @@ function CustomDrawerContent(props) {
       <DrawerItem
         label="Logout"
         icon={() => <MaterialIcons name="logout" size={22} color="gray" />}
-        onPress={() => dispatch(AuthSlice.actions.logout())}
+        onPress={handleLogout}
       />
     </DrawerContentScrollView>
   );
