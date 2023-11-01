@@ -4,7 +4,7 @@ import {
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { Pressable, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import { selectNumberOfItems } from "../store/cartSlice";
@@ -18,20 +18,66 @@ const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+
   const handleLogout = async () => {
     dispatch(AuthSlice.actions.logout());
     await AsyncStorage.removeItem(StorageKey.USER_KEY);
   };
+
   return (
     <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
       <View
+        style={{
+          padding: 10,
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 8,
+          marginBottom: 10,
+        }}
+      >
+        {user?.picture ? (
+          <Image
+            source={{ uri: user?.picture }}
+            style={{ width: 40, height: 40, borderRadius: 25 }}
+          />
+        ) : (
+          <View
+            style={{
+              borderRadius: 30,
+              padding: 8,
+              borderColor: "gray",
+              borderWidth: 2,
+            }}
+          >
+            <FontAwesome5 name="user" size={24} color="gray" />
+          </View>
+        )}
+        <View style={{ gap: 4 }}>
+          {user?.given_name ? (
+            <Text style={{ color: "#000", fontWeight: "600" }}>
+              {user?.given_name}
+            </Text>
+          ) : (
+            <Text style={{ color: "#000", fontWeight: "600" }}>Hi</Text>
+          )}
+          <Text style={{ color: "gray" }}>{user?.email}</Text>
+        </View>
+      </View>
+      <View
+        style={{
+          backgroundColor: "#ebf0ff",
+          height: 1,
+        }}
+      />
+      <DrawerItemList {...props} />
+      {/* <View
         style={{
           backgroundColor: "#ebf0ff",
           height: 1,
           marginHorizontal: 10,
         }}
-      />
+      /> */}
       <DrawerItem
         label="Logout"
         icon={() => <MaterialIcons name="logout" size={22} color="gray" />}
@@ -75,12 +121,6 @@ export const HomeDrawer = () => {
           ),
         })}
       />
-      {/* <Drawer.Screen
-        name="Details"
-        component={Details}
-        options={{ presentation: "modal" }}
-      />
-      <Drawer.Screen name="Cart" component={Cart} /> */}
     </Drawer.Navigator>
   );
 };

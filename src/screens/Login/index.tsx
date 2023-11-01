@@ -93,6 +93,7 @@ const Login: React.FC = () => {
           accessToken: user.accessToken,
           email: user.email,
           picture: user.picture,
+          given_name: user.given_name,
         };
         AsyncStorage.setItem(StorageKey.USER_KEY, JSON.stringify(newUser));
         dispatch(AuthSlice.actions.loginUser(newUser));
